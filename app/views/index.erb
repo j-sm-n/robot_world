@@ -1,0 +1,8 @@
+<a href='/'>Home</a>
+
+<h2>All Robots</h2>
+
+<% @robots.each do |robot| %>
+  <img src="<%= robot.avatar %>"> <a href='/robots/<%= robot.id %>'><h3><%= robot.name %> - <%= robot.department %> (<%= robot.city %>, <%= robot.state %>)</h3></a>
+  <button><a href="/robots/<%= robot.id %>/edit">Edit</a></button><br />
+<% end %>

@@ -1,0 +1,19 @@
+---
+robots:
+- id: 1
+  name: Henry
+  city: Denver
+  state: Colorado
+  avatar: https://robohash.org/something.png?size=200x200
+  birthdate: '1991-11-29'
+  date hired: '2013-12-31'
+  department: Gardening
+- id: 2
+  name: Christron
+  city: Austin
+  state: TX
+  avatar: https://robohash.org/YOUR-TEXT.png?size=200x200
+  birthdate: '1111-11-11'
+  date hired: '2016-08-03'
+  department: Health
+total: 2

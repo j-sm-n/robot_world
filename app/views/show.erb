@@ -1,0 +1,19 @@
+<!-- <ol class="breadcrumb">
+  <li><a href="/robots">Robots</a></li>
+  <li class="active"><%= @robot.name %></li>
+</ol> -->
+
+<a href="/robots">All Robots</a>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= @robot.name %></h3>
+  </div>
+  <div class="panel-body">
+    <img src='<%= @robot.avatar %>'>
+    <%= @robot.city %>, <%= @robot.state %>
+    <%= @robot.birthdate %>
+    <%= @robot.department %>
+    <%= @robot.date_hired %>
+  </div>
+</div>
