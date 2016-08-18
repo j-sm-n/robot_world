@@ -2,18 +2,27 @@
   <li><a href="/robots">Robots</a></li>
   <li class="active"><%= @robot.name %></li>
 </ol> -->
-
+<div class="container">
 <a href="/robots">All Robots</a>
+  <div class="container-fluid text-center">
+    <h3><%= @robot.name %></h3>
+    <div class="row">
+      <div class='col-md-6 col-md-offset-2'>
+        <img src='<%= @robot.avatar %>' class="img-thumbnail"><br />
+      </div>
+      <div class='col-md-4'>
+        <h4><%= @robot.city %>, <%= @robot.state %></h4><br />
+        <h4><%= @robot.birthdate %></h4><br />
+        <h4><%= @robot.date_hired %></h4><br />
+        <h4><%= @robot.department %></h4><br />
+      </div>
+    </div>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= @robot.name %></h3>
-  </div>
-  <div class="panel-body">
-    <img src='<%= @robot.avatar %>'>
-    <%= @robot.city %>, <%= @robot.state %>
-    <%= @robot.birthdate %>
-    <%= @robot.department %>
-    <%= @robot.date_hired %>
+    <a href='/robots/<%= @robot.id %>/edit' class='btn btn-info'>Edit</a>
+
+    <form action="/robots/<%= @robot.id %>" method='post'>
+      <input type='hidden' name='_method' value="delete" />
+      <input type='submit' value='Delete' class='btn btn-danger'/>
+    </form>
   </div>
 </div>

@@ -1,8 +1,12 @@
-<a href='/'>Home</a>
-
+<div class="container-fluid text-center">
 <h2>All Robots</h2>
-
-<% @robots.each do |robot| %>
-  <img src="<%= robot.avatar %>"> <a href='/robots/<%= robot.id %>'><h3><%= robot.name %> - <%= robot.department %> (<%= robot.city %>, <%= robot.state %>)</h3></a>
-  <button><a href="/robots/<%= robot.id %>/edit">Edit</a></button><br />
-<% end %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <% @robots.each do |robot| %>
+          <img src="<%= robot.avatar %>"> <a href='/robots/<%= robot.id %>'><h3><%= robot.name %> - <%= robot.department %> (<%= robot.city %>, <%= robot.state %>)</h3></a>
+      </div>
+        <% end %>
+    </div>
+  </div>
+</div>

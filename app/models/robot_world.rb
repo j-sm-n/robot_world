@@ -19,7 +19,7 @@ class RobotWorld
                               "state" => robot[:state],
                               "avatar" => robot[:avatar],
                               "birthdate" => robot[:birthdate],
-                              "date hired" => robot[:date_hired],
+                              "date_hired" => robot[:date_hired],
                               "department" => robot[:department]
                             }
     end
@@ -41,6 +41,32 @@ class RobotWorld
 
   def find(id)
     Robot.new(raw_robot(id))
+  end
+
+  def update(id, robot_data)
+    database.transaction do
+      robot = database['robots'].find { |row| row['id'] == id }
+      robot['name'] = robot_data[:name]
+      robot['avatar'] = robot_data[:avatar]
+      robot['city'] = robot_data[:city]
+      robot['state'] = robot_data[:state]
+      robot['birthdate'] = robot_data[:birthdate]
+      robot['date_hired'] = robot_data[:date_hired]
+      robot['department'] = robot_data[:department]
+    end
+  end
+
+  def destroy(id)
+    database.transaction do
+      database['robots'].delete_if { |robot| robot['id'] == id }
+    end
+  end
+
+  def delete_all
+    database.transaction do
+      database['robots'] = []
+      database['total'] = 0
+    end
   end
 
   def average_age
