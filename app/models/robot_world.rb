@@ -9,26 +9,15 @@ class RobotWorld
   end
 
   def create(robot)
-    database.transaction do
-      database['robots'] ||= []
-      database['total'] ||= 0
-      database['total'] += 1
-      database['robots'] << { "id" => database['total'],
-                              "name" => robot[:name],
-                              "city" => robot[:city],
-                              "state" => robot[:state],
-                              "avatar" => robot[:avatar],
-                              "birthdate" => robot[:birthdate],
-                              "date_hired" => robot[:date_hired],
-                              "department" => robot[:department]
-                            }
-    end
+    database.execute("INSERT INTO robots
+                    (name, city, state, avatar, birthdate, date_hired, department)
+                    VALUES
+                      ('#{robot[:name]}', '#{robot[:city]}', '#{robot[:state]}', '#{robot[:avatar]}', '#{robot[:birthdate]}', '#{robot[:date_hired]}', '#{robot[:department]}');"
+                    )
   end
 
   def raw_robots
-    database.transaction do
-      database['robots'] || []
-    end
+    database.execute("SELECT * FROM robots;")
   end
 
   def all
@@ -36,7 +25,7 @@ class RobotWorld
   end
 
   def raw_robot(id)
-    raw_robots.find { |robot| robot["id"] == id}
+    database.execute("SELECT * FROM robots WHERE id=?;", id).first
   end
 
   def find(id)
@@ -44,29 +33,33 @@ class RobotWorld
   end
 
   def update(id, robot_data)
-    database.transaction do
-      robot = database['robots'].find { |row| row['id'] == id }
-      robot['name'] = robot_data[:name]
-      robot['avatar'] = robot_data[:avatar]
-      robot['city'] = robot_data[:city]
-      robot['state'] = robot_data[:state]
-      robot['birthdate'] = robot_data[:birthdate]
-      robot['date_hired'] = robot_data[:date_hired]
-      robot['department'] = robot_data[:department]
-    end
+    database.execute("UPDATE robots
+                      SET name=?,
+                      city=?,
+                      state=?,
+                      avatar=?,
+                      birthdate=?,
+                      date_hired=?,
+                      department=?
+                      WHERE id=?;",
+                      robot_data[:name],
+                      robot_data[:city],
+                      robot_data[:state],
+                      robot_data[:avatar],
+                      robot_data[:birthdate],
+                      robot_data[:date_hired],
+                      robot_data[:department], id
+                    )
   end
 
   def destroy(id)
-    database.transaction do
-      database['robots'].delete_if { |robot| robot['id'] == id }
-    end
+    database.execute("DELETE FROM robots
+                      WHERE id=?;", id
+                    )
   end
 
   def delete_all
-    database.transaction do
-      database['robots'] = []
-      database['total'] = 0
-    end
+    database.execute("DELETE FROM robots;")
   end
 
   def average_age

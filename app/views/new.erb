@@ -1,13 +1,33 @@
+<div class="container">
 <form action="/robots" method="post">
-  <p>Add a Robot to the directory:</p>
-  <input type='text' name='robot[name]' placeholder="Name"/><br />
-  <input type='text' name='robot[city]' placeholder="City (Ex. Denver)"/><br />
-  <input type='text' name='robot[state]' placeholder="State (Ex. CO)" /><br />
-  <input type='url' name='robot[avatar]' placeholder="Avatar URL (http://...)" /><br />
-  <p>Birthdate:</p>
-  <input type='date' name='robot[birthdate]' /><br />
-  <input type='text' name='robot[department]' placeholder="Department" /><br />
-  <p>Date Hired:</p>
-  <input type='date' name='robot[date_hired]' /><br />
-  <input type="submit" />
+  <div class="form-group">
+    <label for="titleInput">Name</label>
+    <input type="text" class="form-control" name='robot[name]' id="titleInput" placeholder="Bobtron-48">
+  </div>
+  <div class="form-group">
+    <label for="description">City</label>
+    <input type="text" class='form-control' name='robot[city]' placeholder="Ex. The Institute">
+  </div>
+  <div class="form-group">
+    <label for="description">State</label>
+    <input type="text" class='form-control' name='robot[state]' placeholder="Ex. The Commonwealth">
+  </div>
+  <div class="form-group">
+    <label for="description">Avatar</label>
+    <input type="url" class='form-control' name='robot[avatar]' placeholder="Ex. http://google.com...">
+  </div>
+  <div class="form-group">
+    <label for="description">Birthdate</label>
+    <input type="date" class='form-control' name='robot[birthdate]'>
+  </div>
+  <div class="form-group">
+    <label for="description">Date Hired</label>
+    <input type="date" class='form-control' name='robot[date_hired]'>
+  </div>
+  <div class="form-group">
+    <label for="description">Department</label>
+    <input type="text" class='form-control' name='robot[department]' placeholder="Ex. Synth Retention">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>

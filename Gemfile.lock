@@ -51,6 +51,7 @@ GEM
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
     slop (3.6.0)
+    sqlite3 (1.3.11)
     tilt (2.0.5)
     what_weve_got_here_is_an_error_to_communicate (0.0.8)
       binding_of_caller (~> 0.7.2)
@@ -71,6 +72,7 @@ DEPENDENCIES
   pry
   shotgun
   sinatra
+  sqlite3
 
 BUNDLED WITH
    1.12.5
