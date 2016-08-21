@@ -3,6 +3,11 @@ class RobotWorldApp < Sinatra::Base
   set :method_override, true
 
   get '/' do
+    @get_robot_average_age = robot_world.get_robot_average_age
+    @group_by_hire_year = robot_world.group_by_hire_year
+    @group_by_department = robot_world.group_by_department
+    @group_by_state = robot_world.group_by_state
+    @group_by_city = robot_world.group_by_city
     erb :dashboard
   end
 

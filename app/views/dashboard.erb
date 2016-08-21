@@ -1,17 +1,56 @@
-<div class="container text-center">
+<div class="container">
 
-<div class="jumbotron">
-  <h1>Welcome to the Robot World Directory!</h1>
-  <a href="/robots" class="btn btn-primary btn-lg">View Robots</a>
-</div>
+  <div class="jumbotron text-center">
+    <h1>Welcome to the Robot World Directory!</h1>
+    <a href="/robots" class="btn btn-primary btn-lg">View Robots</a>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="container">
+      <h4>Average Robot Age:</h4>
+      </div>
+    </div>
 
-<h4>Average Robot Age:</h4>
+    <div class="col-md-6">
+      <div class="container">
+      <h4>Hired Robots per Year:</h4>
+      <table>
+        <% @group_by_hire_year.each do |date_hired| %>
+        <tr>
+          <td><%= date_hired["strftime('%Y', date_hired)"] %>: </td>
+          <td><%= date_hired["COUNT(id)"] %></td>
+        </tr>
+        <% end %>
+      </table>
+      </div>
+    </div>
+  </div>
 
-<h4>Hired Robots per Year:</h4>
+  <div class="row">
+    <div class="col-md-6">
+    <div class="container">
+    <h4>Number of Robots by State:</h4>
+    </div>
+  </div>
 
-<h4>Number of Robots by State:</h4>
+    <div class="col-md-6">
+    <div class="container">
+    <h4>Number of Robots by City:</h4>
+    </div>
+  </div>
 
-<h4>Number of Robots by City:</h4>
-
-<h4>Number of Robots by Department:</h4>
+  <div class="row">
+    <div class="col-md-12">
+    <div class="container">
+    <h4>Number of Robots by Department:</h4>
+      <table>
+        <% @group_by_department.each do |department| %>
+        <tr>
+          <td><%= department["department"] %>: </td>
+          <td><%= department["COUNT(id)"] %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
 </div>

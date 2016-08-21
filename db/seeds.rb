@@ -3,7 +3,7 @@ require 'sqlite3'
 database = SQLite3::Database.new("db/robot_world_development.db")
 
 # Delete exisiting records from the tasks table before inserting these new records; we'll start from scratch.
-database.execute("DELETE FROM robots")
+database.execute("DELETE FROM robots;")
 
 # Insert records.
 database.execute("INSERT INTO robots

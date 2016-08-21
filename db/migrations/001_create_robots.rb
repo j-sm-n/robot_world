@@ -10,10 +10,10 @@ environments.each do |environment|
                     state VARCHAR(30),
                     city VARCHAR(30),
                     avatar VARCHAR(100),
-                    birthdate VARCHAR(10),
-                    date_hired VARCHAR(10),
+                    birthdate INTEGER,
+                    date_hired INTEGER,
                     department VARCHAR(64)
-                    )"
+                    );"
                   )
   puts "creating robots table for #{environment}"
 end

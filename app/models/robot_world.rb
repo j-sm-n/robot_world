@@ -8,11 +8,26 @@ class RobotWorld
     @database = database
   end
 
+  def format_date(date_param)
+    if date_param
+      n = date_param.split('-')
+      formatted = "#{n[2]}-#{n[0]}-#{n[1]}"
+    else
+      date_param
+    end
+  end
+
   def create(robot)
     database.execute("INSERT INTO robots
                     (name, city, state, avatar, birthdate, date_hired, department)
                     VALUES
-                      ('#{robot[:name]}', '#{robot[:city]}', '#{robot[:state]}', '#{robot[:avatar]}', '#{robot[:birthdate]}', '#{robot[:date_hired]}', '#{robot[:department]}');"
+                      ('#{robot[:name]}',
+                      '#{robot[:city]}',
+                      '#{robot[:state]}',
+                      '#{robot[:avatar]}',
+                      '#{format_date(robot[:birthdate])}',
+                      '#{format_date(robot[:date_hired])}',
+                      '#{robot[:department]}');"
                     )
   end
 
@@ -46,8 +61,8 @@ class RobotWorld
                       robot_data[:city],
                       robot_data[:state],
                       robot_data[:avatar],
-                      robot_data[:birthdate],
-                      robot_data[:date_hired],
+                      format_date(robot_data[:birthdate]),
+                      format_date(robot_data[:date_hired]),
                       robot_data[:department], id
                     )
   end
@@ -62,24 +77,24 @@ class RobotWorld
     database.execute("DELETE FROM robots;")
   end
 
-  def average_age
+
+  def group_by_department
+    database.execute("SELECT department, COUNT(id) FROM robots GROUP BY department;")
+  end
+
+  def group_by_hire_year
+    database.execute("SELECT strftime('%Y', date_hired), COUNT(id) FROM robots GROUP BY '%Y';")
+  end
+
+  def group_by_state
 
   end
 
-  def robots_hired_per_year
+  def group_by_city
 
   end
 
-  def all_robots_by_state
+  def get_robot_average_age
 
   end
-
-  def all_robots_by_city
-
-  end
-
-  def all_robots_by_department
-
-  end
-
 end

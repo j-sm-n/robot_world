@@ -66,7 +66,7 @@ class RobotWorldTest < Minitest::Test
 
   def test_it_updates_a_robot
     create_robot
-    params = {robot: {name: "Bob", city: "Aurora", state: "CO", avatar: "https://robohash.org/YOUR-TEXT.png", birthdate: "11-29-1991", date_hired: "11-29-2012", department: "IT"}}
+    params = {robot: {name: "Bob", city: "Aurora", state: "CO", avatar: "https://robohash.org/YOUR-TEXT.png", birthdate: "11-29-1985", date_hired: "11-29-2012", department: "IT"}}
     robot_world.update(current_robot_id, params[:robot])
     robot = robot_world.find(current_robot_id)
 
@@ -74,6 +74,43 @@ class RobotWorldTest < Minitest::Test
     assert_equal("Aurora", robot.city)
     assert_equal("CO", robot.state)
     assert_equal("https://robohash.org/YOUR-TEXT.png", robot.avatar)
-    assert_equal("11-29-1991", robot.birthdate)
+    assert_equal("1985-11-29", robot.birthdate)
+  end
+
+  def test_it_groups_robots_on_dept
+    create_robot
+    robot_world.create({
+      :name => "New Robot",
+      :city => "Erie",
+      :state => "CO",
+      :birthday => "08-26-2016",
+      :date_hired => "08-29-2016",
+      :department => "Home Science"
+      })
+
+    assert_equal [{"department"=>"Home Science", "COUNT(id)"=>1, 0=>"Home Science", 1=>1}, {"department"=>"test department", "COUNT(id)"=>1, 0=>"test department", 1=>1}], robot_world.group_by_department
+  end
+
+  def test_it_groups_by_hire_year
+    create_robot
+    robot_world.create({
+      :name => "New Robot",
+      :city => "Newton",
+      :state => "NJ",
+      :birthday => "08-26-2016",
+      :date_hired => "08-29-2015",
+      :department => "Home Science"
+      })
+    robot_world.create({
+      :name => "New Robot",
+      :city => "Newton",
+      :state => "NJ",
+      :birthday => "08-26-2016",
+      :date_hired => "08-29-2014",
+      :department => "Home Science"
+      })
+
+    # fix this test
+    assert_equal [{"strftime('%Y', date_hired)"=>"2014", "COUNT(id)"=>3, 0=>"2014", 1=>3}], robot_world.group_by_hire_year
   end
 end

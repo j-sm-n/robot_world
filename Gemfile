@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'sinatra', require: 'sinatra/base'
-gem 'shotgun'
 gem 'minitest'
 gem 'minitest-emoji', '~> 2.0'
+gem 'shotgun'
 gem 'capybara'
 gem 'launchy'
-gem 'mrspec'
 gem 'sqlite3'
+gem 'mrspec'
 gem 'pry'
