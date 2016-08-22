@@ -83,7 +83,7 @@ class RobotWorld
   end
 
   def group_by_hire_year
-    database.execute("SELECT strftime('%Y', date_hired), COUNT(id) FROM robots GROUP BY '%Y';")
+    database.execute("SELECT strftime('%Y', date_hired), COUNT(id) FROM robots GROUP BY strftime('%Y', date_hired);")
   end
 
   def group_by_state
